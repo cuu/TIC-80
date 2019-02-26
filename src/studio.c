@@ -195,11 +195,16 @@ static struct
 		tic_key_down,
 		tic_key_left,
 		tic_key_right,
-
-		tic_key_z, // a
+		/*
+		tic_key_a, // a
 		tic_key_x, // b
 		tic_key_a, // x
 		tic_key_s, // y
+		*/
+		tic_key_j,
+		tic_key_k,
+		tic_key_u,
+		tic_key_i,
 	},
 
 	.bank = 
@@ -1392,7 +1397,7 @@ static void processShortcuts()
 		else if(keyWasPressedOnce(tic_key_f9)) startVideoRecord();
 #endif
 		else if(keyWasPressedOnce(tic_key_f11)) goFullscreen();
-		else if(keyWasPressedOnce(tic_key_escape))
+		else if(keyWasPressedOnce(tic_key_f10))
 		{
 			Code* code = impl.editor[impl.bank.index.code].code;
 
@@ -1409,7 +1414,10 @@ static void processShortcuts()
 			}
 
 			setStudioMode(impl.mode == TIC_CONSOLE_MODE ? impl.prevMode : TIC_CONSOLE_MODE);
+		}else if(keyWasPressedOnce(tic_key_escape)) {
+			exitStudio();
 		}
+
 	}
 }
 
