@@ -359,24 +359,25 @@ static void calcTextureRect(SDL_Rect* rect)
 		if (rect->w * Height < rect->h * Width)
 		{
 
-
+			
 			s32 x,y,k;
 			x = abs(rect->w-Width);
 			y = abs(rect->h-Height);
 			k = x > y?x:y;
-	                s32 suppose_w = Width;
-		        s32 suppose_h = Height;
-
-		    for(int i=0;i<=k*2;i+=1){
-		    	suppose_w+=1;
-		    	suppose_h+=1;
-
-		    	if(suppose_w >= rect->w || suppose_h >= rect->h) {
+	    s32 suppose_w = Width;
+		  s32 suppose_h = Height;
+			float ratio = (float)Width/(float)Height;
+			
+		  for(int i=0;i<=k*2;i+=1){
+	    	  if(suppose_w >= rect->w || suppose_h >= rect->h) {
 		    		break;
 		    	}
-		    }
-
-
+	
+		    	suppose_w+=1;
+		    	suppose_h =  (s32)((float)suppose_w / ratio);
+		  }
+			
+			
 			s32 discreteWidth = rect->w - rect->w % suppose_w;
 			s32 discreteHeight = suppose_h * discreteWidth / suppose_w;
 
@@ -384,7 +385,7 @@ static void calcTextureRect(SDL_Rect* rect)
 
 			rect->y = rect->w > rect->h 
 				? (rect->h - discreteHeight) / 2 
-				: TIC80_OFFSET_TOP*discreteWidth/Width;
+				: TIC80_OFFSET_TOP*discreteWidth/ suppose_w;
 
 			rect->w = discreteWidth;
 			rect->h = discreteHeight;

@@ -3232,7 +3232,8 @@ void initConsole(Console* console, tic_mem* tic, FileSystem* fs, Config* config,
 			{
 				char buf[256];
 				sprintf(buf, "parameter or file not processed: %s\n", argv[i]);
-				getSystem()->showMessageBox("Warning", buf);
+				printf("%s",buf);
+//				getSystem()->showMessageBox("Warning", buf);
 			}
 		}
 	}
