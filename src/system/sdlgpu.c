@@ -336,7 +336,7 @@ static void calcTextureRect(SDL_Rect* rect)
 		enum{Width = TIC80_FULLWIDTH, Height = TIC80_FULLHEIGHT};
 
 		if (rect->w * Height < rect->h * Width)
-		{
+		{		
 			rect->x = 0;
 			rect->y = 0;
 
@@ -364,18 +364,18 @@ static void calcTextureRect(SDL_Rect* rect)
 			x = abs(rect->w-Width);
 			y = abs(rect->h-Height);
 			k = x > y?x:y;
-	    s32 suppose_w = Width;
-		  s32 suppose_h = Height;
+	    		s32 suppose_w = Width;
+		  	s32 suppose_h = Height;
 			float ratio = (float)Width/(float)Height;
 			
-		  for(int i=0;i<=k*2;i+=1){
-	    	  if(suppose_w >= rect->w || suppose_h >= rect->h) {
+		  	for(int i=0;i<=k*2;i+=1){
+	    	  		if(suppose_w >= rect->w || suppose_h >= rect->h) {
 		    		break;
 		    	}
 	
-		    	suppose_w+=1;
-		    	suppose_h =  (s32)((float)suppose_w / ratio);
-		  }
+		    		suppose_w+=1;
+		    		suppose_h =  (s32)((float)suppose_w / ratio);
+		  	}
 			
 			
 			s32 discreteWidth = rect->w - rect->w % suppose_w;
@@ -1483,7 +1483,7 @@ static s32 start(s32 argc, char **argv, const char* folder)
 
 	platform.gpu.texture = GPU_CreateImage(TIC80_FULLWIDTH, TIC80_FULLHEIGHT, STUDIO_PIXEL_FORMAT);
 	GPU_SetAnchor(platform.gpu.texture, 0, 0);
-	GPU_SetImageFilter(platform.gpu.texture, GPU_FILTER_NEAREST);
+	GPU_SetImageFilter(platform.gpu.texture, GPU_FILTER_LINEAR);
 
 #if defined(__EMSCRIPTEN__)
 
